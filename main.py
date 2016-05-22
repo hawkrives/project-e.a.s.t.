@@ -44,6 +44,9 @@ def philosophize(sentences):
         else:
             absolute_truths[thought[0]] = [thought[1]]
 
+    # Discover the dualistic nature of the cosmos.
+    contraditctions = {}
+
     # Identify the conclusion, the culmination of all ancestral thought.
     print_conclusion(sentences[-1])
     conclusion = sg.sylloparse(sentences[-1])
