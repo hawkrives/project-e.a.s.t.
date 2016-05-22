@@ -10,6 +10,10 @@ for sentence in sentences:
     parse = nlp(sentence)
     print(parse.text)
     for token in parse:
-        print (token.pos_, token.tag_, token.lemma_,
-               '<-'+token.dep_+'-', token.head, token.orth_)
+        print(token.pos_,
+              token.tag_,
+              token.lemma_,
+              '<-%s-' % token.dep_,
+              token.head,
+              token.orth_)
     print('--------------------------------------------------')
