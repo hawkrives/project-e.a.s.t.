@@ -3,6 +3,7 @@ truthfinder.py - given a statement and a list of truths, determine whether or
                  not the statement is confirmed (always true), plausible
                  (sometimes true), or busted (never true). Thanks Mythbusters.
 """
+from .constants import CONFIRMED, BUSTED, PLAUSIBLE
 
 
 def searchForTruth(statement, truths):
@@ -11,9 +12,9 @@ def searchForTruth(statement, truths):
     a statement is true.
     '''
     if statement[0] == statement[1]:
-        return True
+        return CONFIRMED
     if statement[0] in truths:
         for word in truths[statement[0]]:
             if searchForTruth([word, statement[1]], truths):
-                return True
-    return False
+                return CONFIRMED
+    return PLAUSIBLE

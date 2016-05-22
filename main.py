@@ -50,8 +50,10 @@ def philosophize(sentences):
     # Find truth from the conclusion, and witness the beauty and order of the
     # universe.
     truth = sg.searchForTruth(conclusion, absolute_truths)
-    if truth:
+    if truth == sg.CONFIRMED:
         print('Conclusion: Confirmed.')
+    elif truth == sg.PLAUSIBLE:
+        print('Conclusion: Plausible.')
     else:
         print('Conclusion: Busted.')
 
