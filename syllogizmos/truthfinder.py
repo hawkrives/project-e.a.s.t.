@@ -4,9 +4,12 @@ truthfinder.py - given a statement and a list of truths, determine whether or
                  (sometimes true), or busted (never true). Thanks Mythbusters.
 """
 
-# The truth-finding function that will recursively determine whether or not
-# a statement is true.
+
 def searchForTruth(statement, truths):
+    '''
+    The truth-finding function that will recursively determine whether or not
+    a statement is true.
+    '''
     if statement[0] == statement[1]:
         return True
     if statement[0] in truths:
