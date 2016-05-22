@@ -27,3 +27,4 @@
 *.out
 *.app
 *.pyc
+.DS_Store
