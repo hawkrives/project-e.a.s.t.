@@ -43,7 +43,7 @@ Given the text file `women.txt` in the `rationalizations` folder that contains t
 	Anna is a woman.
 	Anna is mortal.
 
-When you run `syllogizmos rationalizations/women.txt`, you will see the result:
+When you run `./main.py rationalizations/women.txt`, you will see the result:
 
 	Statement: "Women are mortal."
 	Statement: "Anna is a woman."
