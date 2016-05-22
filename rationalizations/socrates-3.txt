@@ -1,0 +1,5 @@
+All men are mortal.
+All gods are immortal.
+All Homo Sapiens are men.
+Socrates is a Homo Sapiens.
+Therefore, Socrates is mortal.

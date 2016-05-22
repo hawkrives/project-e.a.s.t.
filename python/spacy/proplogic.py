@@ -8,11 +8,14 @@ with open(sys.argv[1], 'r') as infile:
     sentences = infile.readlines()
 
 def getTokenByDep(doc, deps):
-    for token in doc:
-        for dep in deps:
-            if token.dep_ == dep:
-                return token
+    filtered = [t for t in doc if t.dep_ in deps]
+    for token in filtered:
+        return ' '.join([t.lemma_ for t in token.subtree
+                         if t.dep_ in deps or t.dep_ == 'amod'])
     return None
+
+def getTokenByPOS(doc, pos):
+    return [t for t in doc if t.pos_ in pos]
 
 absolute_truths = {}
 propositions = sentences[:-1]
@@ -22,13 +25,20 @@ for sentence in propositions:
     sentence = sentence.strip()
     parse = nlp(sentence)
 
+    # The root of the parse, which is the verb, should be a form of 'be'.
+    # Otherwise, we don't have a proposition.
+    verbs = getTokenByPOS(parse, ['VERB'])
+    if not any([v.lemma_ == 'be' for v in verbs]):
+        print('Warning: not using "be" verb. Ignored Sentence "%s"' % parse.text)
+        continue
+
     subj = getTokenByDep(parse, ['nsubj'])
     obj = getTokenByDep(parse, ['attr', 'acomp'])
 
-    if (subj.lemma_ in absolute_truths):
-        absolute_truths[subj.lemma_].append(obj.lemma_)
+    if (subj in absolute_truths):
+        absolute_truths[subj].append(obj)
     else:
-        absolute_truths[subj.lemma_] = [obj.lemma_]
+        absolute_truths[subj] = [obj]
 
 if os.getenv('DEBUG'):
     print('DICTIONARY:', absolute_truths)
@@ -40,7 +50,7 @@ for sentence in conclusions:
     subj = getTokenByDep(parse, ['nsubj'])
     obj = getTokenByDep(parse, ['attr', 'acomp'])
 
-    statement = [subj.lemma_, obj.lemma_]
+    statement = [subj, obj]
 
 if os.getenv('DEBUG'):
     print('STATEMENT:', statement)

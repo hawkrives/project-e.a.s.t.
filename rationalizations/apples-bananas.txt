@@ -1,0 +1,4 @@
+Birds can fly.
+Apples are red fruit.
+Bananas are yellow fruit.
+Apples are yellow fruit.
