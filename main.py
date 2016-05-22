@@ -5,6 +5,7 @@ main.py - the main file that will parse a series of propositions and evaluate
           their truthfulness.
 """
 import sys
+import argparse
 import syllogizmos as sg
 
 
@@ -58,8 +59,19 @@ def philosophize(sentences):
         print('Conclusion: Busted.')
 
 
+def get_args():
+    parser = argparse.ArgumentParser(description='Philosophize about truth.')
+    parser.add_argument('file', nargs=1, help='The file to process')
+    return parser.parse_args()
+
+
+def load_file(filename):
+    with open(filename, 'r') as infile:
+        return infile.readlines()
+
+
 if __name__ == '__main__':
     # Load in the argument from a text file
-    with open(sys.argv[1], 'r') as infile:
-        lines = infile.readlines()
+    args = get_args()
+    lines = load_file(args.file[0])
     philosophize(lines)
