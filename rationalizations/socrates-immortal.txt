@@ -1,0 +1,4 @@
+All men are mortals.
+Immortals are dead.
+Socrates is a man.
+Socrates is immortal.
