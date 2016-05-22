@@ -1,5 +1,5 @@
 # Syllogizmos
-> [DECLASSIFIED] – Used to be Project E.A.S.T.
+> Project E.A.S.T. [DECLASSIFIED]
 
 Given a text file, we find list of propositions and a conclusion.
 
@@ -25,12 +25,12 @@ You will need a text file with several sentences. Each sentence should be on its
 
 That is, each line needs to state a fact.
 
-> Women are mortal.
-> Anna is a woman.
+	Women are mortal.
+	Anna is a woman.
 
 The file must end with a conclusion:
 
-> Anna is mortal.
+	Anna is mortal.
 
 Syllogizmos will return "Confirmed", "Plausible", or "Busted", depending on the outcome of evaluating that statement.
 
