@@ -34,6 +34,10 @@ for sentence in propositions:
 
     subj = getTokenByDep(parse, ['nsubj'])
     obj = getTokenByDep(parse, ['attr', 'acomp'])
+    negs = getTokenByDep(parse, ['neg'])
+
+    if (negs):
+        obj = '!' + obj
 
     if (subj in absolute_truths):
         absolute_truths[subj].append(obj)
@@ -49,6 +53,10 @@ for sentence in conclusions:
 
     subj = getTokenByDep(parse, ['nsubj'])
     obj = getTokenByDep(parse, ['attr', 'acomp'])
+    negs = getTokenByDep(parse, ['neg'])
+
+    if (negs):
+        obj = '!' + obj
 
     statement = [subj, obj]
 
