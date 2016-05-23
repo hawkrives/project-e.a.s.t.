@@ -3,7 +3,10 @@ sylloparser.py - pulls the subject and object out of a proposition.
 """
 import spacy
 from sys import stderr
+print('Loading collective knowledge…', file=stderr, end=' ')
+stderr.flush()
 nlp = spacy.load('en')
+print('loaded.', file=stderr)
 
 
 def getTokensByDep(doc, deps):
