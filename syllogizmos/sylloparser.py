@@ -59,7 +59,7 @@ def sylloparse(sentence):
         obj = ['!' + o for o in obj]
 
     determiners = getTokensByDep(parse, ['det'])
-    if determiners[0] and determiners[0] != 'all':
+    if determiners[0] and determiners[0] in ['some', 'many', 'few']:
         abs_or_partial = 'partial'
     else:
         abs_or_partial = 'absolute'
