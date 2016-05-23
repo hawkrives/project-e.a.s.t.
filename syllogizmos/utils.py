@@ -1,3 +1,7 @@
+from copy import deepcopy
+from collections import defaultdict
+
+
 def flatten(*args):
     # from http://stackoverflow.com/a/2158532/2347774
     for l in args:
@@ -20,3 +24,16 @@ def find_index_in_tuples(lst, word):
         if word in tup:
             return i
     return None
+
+
+def merge_dict(dict1, dict2):
+    retval = {}
+    for k, v in dict1.items():
+        retval[k] = v
+    for k, v in dict2.items():
+        if k in retval:
+            retval[k] |= v
+        else:
+            retval[k] = v
+
+    return retval

@@ -18,6 +18,8 @@ def searchForTruthInner(subject, object, truths, contradictions):
         for word in truths[subject]:
             if searchForTruthInner(word, object, truths, contradictions):
                 return True
+            elif searchForTruthInner('%s %s' % (word, subject), object, truths, contradictions):
+                return True
     return False
 
 

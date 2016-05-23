@@ -19,7 +19,7 @@ def getTokensByDep(doc, deps):
                                       if t.dep_ in deps or t.dep_ in SUBTREE_TYPES])
         just_noun = token.lemma_
         return [modifier_and_noun, just_noun]
-    return None
+    return [None, None]
 
 
 def getTokensByPOS(doc, pos):
@@ -42,7 +42,7 @@ def sylloparse(sentence):
     if not any([v.lemma_ == 'be' for v in verbs]):
         msg = 'Warning: "{}" does not have "be" as a verb. Ignoring sentence.'.format(parse.text)
         print(msg, file=stderr)
-        return None, None
+        return None, None, None
 
     # We have a valid proposition, so we need to get the entity for the
     # subject and the entity for the object of the proposition. The subject
@@ -55,8 +55,14 @@ def sylloparse(sentence):
     # proposition. Currently, we negate the object of the proposition if we
     # detect the presence of a negation.
     negs = getTokensByDep(parse, ['neg'])
-    if negs:
+    if all(negs):
         obj = ['!' + o for o in obj]
 
+    determiners = getTokensByDep(parse, ['det'])
+    if determiners[0] and determiners[0] != 'all':
+        abs_or_partial = 'partial'
+    else:
+        abs_or_partial = 'absolute'
+
     # Return the subject, object dependency as an array.
-    return subj, obj
+    return abs_or_partial, subj[0], obj

@@ -29,39 +29,51 @@ def philosophize(sentences):
 
     # Build the collective thought and knowledge of our ancestors, as stated
     # in the propositions.
+    partial_truths = {}
     absolute_truths = {}
     for sentence in sentences[:-1]:
         print_statement(sentence)
-        subjects, objects = sg.sylloparse(sentence)
+        abs_or_partial, subject, objects = sg.sylloparse(sentence)
 
         # Make sure that we have a complete thought
-        if not subjects or not objects:
+        if not subject or not all(objects):
             continue
 
         # Do not store repeated knowledge. Instead, collect it.
-        for subject in subjects:
-            for object in objects:
-                if (subject in absolute_truths):
-                    absolute_truths[subject].add(object)
-                else:
-                    absolute_truths[subject] = {object}
+        if abs_or_partial == 'absolute':
+            truths = absolute_truths
+        elif abs_or_partial == 'partial':
+            truths = partial_truths
+
+        for object in objects:
+            if (subject in truths):
+                truths[subject].add(object)
+            else:
+                truths[subject] = {object}
 
     # Discover the dualistic nature of the cosmos.
     contradictions = sg.buildContradictions(absolute_truths)
 
     # Augment knowledge with the previous discoveries
-    # print(absolute_truths)
+    # print(absolute_truths, partial_truths)
     absolute_truths = sg.augment_with_contradictions(absolute_truths, contradictions)
-    # print(absolute_truths)
+    # print(absolute_truths, partial_truths)
 
     # Identify the conclusion, the culmination of all ancestral thought.
     print_conclusion(sentences[-1])
-    conclusion_subj, conclusion_obj = sg.sylloparse(sentences[-1])
+    abs_or_partial, conclusion_subj, conclusion_obj = sg.sylloparse(sentences[-1])
 
     # Find truth from the conclusion, and witness the beauty and order of the
     # universe.
-    truth = sg.searchForTruth(conclusion_subj[0], conclusion_obj[0],
-                              absolute_truths, contradictions)
+    if abs_or_partial == 'partial':
+        truths = sg.merge_dict(absolute_truths, partial_truths)
+    else:
+        truths = absolute_truths
+
+    # print(truths)
+    truth = sg.searchForTruth(conclusion_subj, conclusion_obj[0],
+                              truths, contradictions)
+
     if truth == sg.CONFIRMED:
         print('Conclusion: Confirmed.')
     elif truth == sg.PLAUSIBLE:
