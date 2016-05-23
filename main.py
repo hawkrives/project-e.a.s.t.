@@ -45,7 +45,7 @@ def philosophize(sentences):
             absolute_truths[thought[0]] = [thought[1]]
 
     # Discover the dualistic nature of the cosmos.
-    contraditctions = sg.buildContradictions(absolute_truths)
+    contradictions = sg.buildContradictions(absolute_truths)
 
     # Identify the conclusion, the culmination of all ancestral thought.
     print_conclusion(sentences[-1])
@@ -53,7 +53,7 @@ def philosophize(sentences):
 
     # Find truth from the conclusion, and witness the beauty and order of the
     # universe.
-    truth = sg.searchForTruth(conclusion, absolute_truths)
+    truth = sg.searchForTruth(conclusion, absolute_truths, contradictions)
     if truth == sg.CONFIRMED:
         print('Conclusion: Confirmed.')
     elif truth == sg.PLAUSIBLE:
