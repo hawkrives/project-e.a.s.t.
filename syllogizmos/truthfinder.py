@@ -15,6 +15,6 @@ def searchForTruth(statement, truths):
         return CONFIRMED
     if statement[0] in truths:
         for word in truths[statement[0]]:
-            if searchForTruth([word, statement[1]], truths):
+            if searchForTruth([word, statement[1]], truths) == CONFIRMED:
                 return CONFIRMED
     return PLAUSIBLE
