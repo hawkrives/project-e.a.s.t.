@@ -3,6 +3,7 @@ contradictions.py - builds a list of mutually contradictory terms from the tenet
                     of established truths.
 """
 import collections
+from .word_lists import prefixes
 
 
 def flatten(*args):
@@ -17,6 +18,9 @@ def flatten(*args):
 
 def buildContradictions(truths):
     '''Creates a list of contradictory words from statements in the dictonary'''
-    terms = flatten(truths.items())
-    unique = set(terms)
-    print(unique)
+    unique_words = set(flatten(truths.items()))
+    opposites = {w: [p + w for p in prefixes
+                     if p + w in unique_words]
+                 for w in unique_words}
+    opposites = {k: v for k, v in opposites.items() if v}
+    return opposites
