@@ -32,6 +32,8 @@ The file must end with a conclusion:
 
 	Anna is mortal.
 
+The world of Syllogizmos is built solely from the statements, not the conclusion. Anything that you wish to test, you must define in the statements.
+
 Syllogizmos will return "Confirmed", "Plausible", or "Busted", depending on the outcome of evaluating that statement.
 
 

@@ -2,7 +2,8 @@ def flatten(*args):
     # from http://stackoverflow.com/a/2158532/2347774
     for l in args:
         for el in l:
-            if (isinstance(el, list) or isinstance(el, tuple)) and not isinstance(el, str):
+            if (isinstance(el, list) or isinstance(el, tuple) or isinstance(el, set)) \
+                    and not isinstance(el, str):
                 yield from flatten(el)
             else:
                 yield el

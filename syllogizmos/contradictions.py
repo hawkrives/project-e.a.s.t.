@@ -9,6 +9,7 @@ from .utils import flatten
 
 def buildContradictions(truths):
     '''Creates a list of contradictory words from statements in the dictonary'''
+    # print(truths)
     unique_words = set(flatten(truths.items()))
     contradictions = {w: [p + w for p in prefixes
                           if p + w in unique_words]

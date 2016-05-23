@@ -32,31 +32,36 @@ def philosophize(sentences):
     absolute_truths = {}
     for sentence in sentences[:-1]:
         print_statement(sentence)
-        thought = sg.sylloparse(sentence)
+        subjects, objects = sg.sylloparse(sentence)
 
         # Make sure that we have a complete thought
-        if not thought:
+        if not subjects or not objects:
             continue
 
         # Do not store repeated knowledge. Instead, collect it.
-        if (thought[0] in absolute_truths):
-            absolute_truths[thought[0]].append(thought[1])
-        else:
-            absolute_truths[thought[0]] = [thought[1]]
+        for subject in subjects:
+            for object in objects:
+                if (subject in absolute_truths):
+                    absolute_truths[subject].add(object)
+                else:
+                    absolute_truths[subject] = {object}
 
     # Discover the dualistic nature of the cosmos.
     contradictions = sg.buildContradictions(absolute_truths)
 
     # Augment knowledge with the previous discoveries
+    # print(absolute_truths)
     absolute_truths = sg.augment_with_contradictions(absolute_truths, contradictions)
+    # print(absolute_truths)
 
     # Identify the conclusion, the culmination of all ancestral thought.
     print_conclusion(sentences[-1])
-    conclusion = sg.sylloparse(sentences[-1])
+    conclusion_subj, conclusion_obj = sg.sylloparse(sentences[-1])
 
     # Find truth from the conclusion, and witness the beauty and order of the
     # universe.
-    truth = sg.searchForTruth(conclusion, absolute_truths, contradictions)
+    truth = sg.searchForTruth(conclusion_subj[0], conclusion_obj[0],
+                              absolute_truths, contradictions)
     if truth == sg.CONFIRMED:
         print('Conclusion: Confirmed.')
     elif truth == sg.PLAUSIBLE:

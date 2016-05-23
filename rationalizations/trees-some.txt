@@ -1,0 +1,3 @@
+Some trees are green.
+Green trees are fruit-bearing.
+Some trees are fruit-bearing.

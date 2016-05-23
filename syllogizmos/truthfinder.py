@@ -7,27 +7,27 @@ from .constants import CONFIRMED, BUSTED, PLAUSIBLE
 from .utils import invert
 
 
-def searchForTruthInner(statement, truths, contradictions):
+def searchForTruthInner(subject, object, truths, contradictions):
     '''
     The truth-finding function that will recursively determine whether or not
     a statement is true.
     '''
-    if statement[0] == statement[1]:
+    if subject == object:
         return True
-    if statement[0] in truths:
-        for word in truths[statement[0]]:
-            if searchForTruthInner([word, statement[1]], truths, contradictions):
+    if subject in truths:
+        for word in truths[subject]:
+            if searchForTruthInner(word, object, truths, contradictions):
                 return True
     return False
 
 
-def searchForTruth(statement, truths, contradictions):
+def searchForTruth(subject, object, truths, contradictions):
     '''
     The truth-finding function that will recursively determine whether or not
     a statement is true.
     '''
-    if searchForTruthInner(statement, truths, contradictions):
+    if searchForTruthInner(subject, object, truths, contradictions):
         return CONFIRMED
-    elif searchForTruthInner([statement[0], invert(statement[1])], truths, contradictions):
+    elif searchForTruthInner(subject, invert(object), truths, contradictions):
         return BUSTED
     return PLAUSIBLE
