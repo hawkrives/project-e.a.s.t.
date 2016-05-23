@@ -4,18 +4,19 @@ contradictions.py - builds a list of mutually contradictory terms from the tenet
 """
 import collections
 
-def flatten(array):
-    '''Flattens a list of any depth'''
-    for item in array:
-        basestring = (str, bytes)
-        if isinstance(item, collections.Iterable) and not isinstance(item, basestring):
-            for sub in flatten(item):
-                yield sub
-        else:
-            yield item
+
+def flatten(*args):
+    # from http://stackoverflow.com/a/2158532/2347774
+    for l in args:
+        for el in l:
+            if isinstance(el, list) and not isinstance(el, str):
+                yield from flatten(el)
+            else:
+                yield el
+
 
 def buildContradictions(truths):
     '''Creates a list of contradictory words from statements in the dictonary'''
-    terms = flatten([[v, truths[v]] for v in truths])
-    unique = list(set(terms))
+    terms = flatten([[k, v] for k, v in truths.items()])
+    unique = set(terms)
     print(unique)
