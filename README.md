@@ -1,5 +1,9 @@
 # Syllogizmos
-> Project E.A.S.T. [DECLASSIFIED]
+> Formerly Project E.A.S.T. [DECLASSIFIED]  
+
+[Those] buffalo(es) from Buffalo [that are intimidated by] buffalo(es) from Buffalo intimidate buffalo(es) from Buffalo.
+
+---
 
 Given a text file, we find list of propositions and a conclusion.
 
