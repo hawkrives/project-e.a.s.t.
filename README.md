@@ -51,6 +51,3 @@ When you run `./main.py rationalizations/women.txt`, you will see the result:
 	Statement: "Anna is a woman."
 	Conclusion: "Anna is mortal."
 	Conclsion: Comfirmed.
-
-
-## Background Information
