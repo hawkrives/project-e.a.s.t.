@@ -4,12 +4,7 @@ truthfinder.py - given a statement and a list of truths, determine whether or
                  (sometimes true), or busted (never true). Thanks Mythbusters.
 """
 from .constants import CONFIRMED, BUSTED, PLAUSIBLE
-
-
-def invert(statement):
-    if statement.startswith('!'):
-        return statement[1:]
-    return '!' + statement
+from .utils import invert
 
 
 def searchForTruthInner(statement, truths, contradictions):
