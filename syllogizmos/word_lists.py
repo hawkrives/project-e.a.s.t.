@@ -1,3 +1,5 @@
+import copy
+
 prefixes = ['mis', 'im', 'un', 'dis']
 
 opposites = {
@@ -365,3 +367,9 @@ opposites = {
 }
 
 opposites = {k: v.split(', ') for k, v in opposites.items()}
+for k, v in dict(opposites).items():
+    for w in v:
+        if w in opposites:
+            opposites[w].append(k)
+        else:
+            opposites[w] = [k]

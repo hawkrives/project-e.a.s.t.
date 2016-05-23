@@ -52,11 +52,13 @@ def philosophize(sentences):
                 truths[subject] = {object}
 
     # Discover the dualistic nature of the cosmos.
-    contradictions = sg.buildContradictions(absolute_truths)
+    contradictions = sg.buildContradictions(absolute_truths, partial_truths)
 
     # Augment knowledge with the previous discoveries
     # print(absolute_truths, partial_truths)
+    partial_truths = sg.augment_with_contradictions(partial_truths, contradictions)
     absolute_truths = sg.augment_with_contradictions(absolute_truths, contradictions)
+    all_truths = sg.merge_dict(absolute_truths, partial_truths)
     # print(absolute_truths, partial_truths)
 
     # Identify the conclusion, the culmination of all ancestral thought.
@@ -66,7 +68,7 @@ def philosophize(sentences):
     # Find truth from the conclusion, and witness the beauty and order of the
     # universe.
     if abs_or_partial == 'partial':
-        truths = sg.merge_dict(absolute_truths, partial_truths)
+        truths = all_truths
     else:
         truths = absolute_truths
 
