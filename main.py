@@ -45,7 +45,7 @@ def philosophize(sentences):
             absolute_truths[thought[0]] = [thought[1]]
 
     # Discover the dualistic nature of the cosmos.
-    contraditctions = {}
+    contraditctions = sg.buildContradictions(absolute_truths)
 
     # Identify the conclusion, the culmination of all ancestral thought.
     print_conclusion(sentences[-1])
