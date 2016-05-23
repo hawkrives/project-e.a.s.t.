@@ -64,7 +64,7 @@ def philosophize(sentences):
 
 def get_args():
     parser = argparse.ArgumentParser(description='Philosophize about truth.')
-    parser.add_argument('file', nargs=1, help='The file to process')
+    parser.add_argument('file', nargs='+', help='A file to process')
     return parser.parse_args()
 
 
@@ -76,5 +76,8 @@ def load_file(filename):
 if __name__ == '__main__':
     # Load in the argument from a text file
     args = get_args()
-    lines = load_file(args.file[0])
-    philosophize(lines)
+    for file in args.file:
+        print('Syllogizing about ' + file)
+        lines = load_file(file)
+        philosophize(lines)
+        print()
